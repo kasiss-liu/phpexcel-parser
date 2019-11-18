@@ -1,0 +1,13 @@
+{
+    "name": "kasiss-liu/phpexcel-parser",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kasiss",
+            "email": "kasiss@163.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.10"
+    }
+}
