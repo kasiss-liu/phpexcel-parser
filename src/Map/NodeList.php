@@ -2,7 +2,7 @@
 
 namespace Kasiss\PhpExcelParser\Map;
 
-class NodeList  implements \arrayaccess{
+class NodeList implements \arrayaccess{
     
     protected $list = [];
 
@@ -14,6 +14,10 @@ class NodeList  implements \arrayaccess{
     }
     public function len() {
         return count($this->list);
+    }
+
+    public function getList() {
+        return $this->list;
     }
 
     public function get($nodeKey) {

@@ -19,19 +19,22 @@ class Loader {
         $nodeName = 'nodeName';
         $realName = 'realname';
         $description = 'description';
+        $expression = 'expression';
+        $value = 'value';
 
         if($mapping) {
             isset($mapping['nodeName']) && $mapping['nodeName'] && $nodeName = $mapping['nodeName'];
             isset($mapping['realName']) && $mapping['realName'] && $realName = $mapping['realName'];
             isset($mapping['description']) && $mapping['description'] && $description = $mapping['description'];
+            isset($mapping['expression']) && $mapping['expression'] && $expression = $mapping['expression'];
+            isset($mapping['value']) && $mapping['value'] && $value = $mapping['value'];
         }
-
         $nodeList = new NodeList();
         foreach($arr as $v) {
             if(!isset($v[$nodeName]) || !isset($v[$realName]) || !isset($v[$description])) {
                 continue;
             }
-            $node = Node::create($v[$nodeName],$v[$realName],$v[$description]);
+            $node = Node::create($v[$nodeName],$v[$realName],$v[$description],$v[$expression],$v[$value]);
             $nodeList->set($v[$realName],$node);
         }
         return $nodeList;

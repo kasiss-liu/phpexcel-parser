@@ -9,6 +9,8 @@ class Node implements \arrayaccess {
     protected $description;
     protected $expression;
     protected $value;
+    protected $sheetName;
+    protected $cellName;
 
 
     public function __construct($nodeName,$realName,$desc,$expression="",$value="") {
@@ -17,6 +19,13 @@ class Node implements \arrayaccess {
         $this->description = $desc;
         $this->expression = $expression;
         $this->value = $value;
+        if(strpos($nodeName,'!') > 0) {
+            $explode = explode('!',$nodeName);
+            if(count($explode) > 1) {
+                $this->cellName = $explode[1];
+                $this->sheetName = $explode[0];
+            }
+        }
     }
 
     public function __get($prop) {
