@@ -1,6 +1,7 @@
 {
     "name": "kasiss-liu/phpexcel-parser",
     "license": "MIT",
+    "description":"auto parse excel calculate result",
     "authors": [
         {
             "name": "kasiss",
@@ -9,5 +10,15 @@
     ],
     "require": {
         "phpoffice/phpspreadsheet": "^1.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kasiss\\PhpExcelParser\\":"src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kasiss\\PhpExcelParser\\":"src/"
+        }
     }
 }
