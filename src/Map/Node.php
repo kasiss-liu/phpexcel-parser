@@ -28,6 +28,22 @@ class Node implements \arrayaccess {
         }
     }
 
+    public function toJson() {
+        return json_encode($this->toArray(),JSON_UNESCAPED_UNICODE);
+    }
+
+    public function toArray() {
+        return [
+            'realName' => $this->realName,
+            'nodeName' => $this->nodeName,
+            'description' => $this->description,
+            'expression' => $this->expression,
+            'sheetName' => $this->sheetName,
+            'cellName' => $this->cellName,
+            'value' => $this->value,
+        ];
+    }
+
     public function __get($prop) {
         return isset($this->$prop) ? $this->$prop : null;
     }

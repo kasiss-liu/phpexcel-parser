@@ -15,7 +15,7 @@ class NodeListTest extends TestCase
         $mapping = new Mapping('node','real','desc');
         $data = [];
         for($i = 1; $i <= 10; $i++) {
-            $tmp = ['node'=>'A'.$i,'real'=>'test'.$i,"desc"=>"desc ".$i];
+            $tmp = ['node'=>'A'.$i,'real'=>'test'.$i,"desc"=>"desc ".$i,"value"=>'',"expression"=>''];
             $data[] = $tmp;
         }
         return ['data'=>$data ,'mapping'=> $mapping];
@@ -45,6 +45,9 @@ class NodeListTest extends TestCase
         $this->assertEquals("test3",$node3->realName);
         $this->assertEquals("A3",$node3->nodeName);
         $this->assertEquals("desc 3",$node3->description);
+        
+        $this->assertTrue(is_array($node3->toArray()));
+        $this->assertTrue(is_array($nodeList->toArray()));
 
     }
 }

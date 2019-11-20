@@ -34,6 +34,12 @@ class Loader {
             if(!isset($v[$nodeName]) || !isset($v[$realName]) || !isset($v[$description])) {
                 continue;
             }
+            if(!isset($v[$expression])) {
+                $v[$expression] = "";
+            }
+            if(!isset($v[$value])) {
+                $v[$value] = "";
+            }
             $node = Node::create($v[$nodeName],$v[$realName],$v[$description],$v[$expression],$v[$value]);
             $nodeList->set($v[$realName],$node);
         }

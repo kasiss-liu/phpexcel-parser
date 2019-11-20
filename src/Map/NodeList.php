@@ -20,6 +20,19 @@ class NodeList implements \arrayaccess{
         return $this->list;
     }
 
+    public function toArray() {
+        $d = [];
+        foreach($this->list as $node) {
+            $d[] = $node->toArray();
+        }
+        return $d;
+    }
+
+    public function toJson() {
+        $d = $this->toArray(); 
+        return json_encode($d,JSON_UNESCAPED_UNICODE);
+    }
+
     public function get($nodeKey) {
         return isset($this->list[$nodeKey]) ? $this->list[$nodeKey] : null;
     }
