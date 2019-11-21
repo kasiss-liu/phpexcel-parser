@@ -52,6 +52,14 @@ class Node implements \arrayaccess {
         $this->$prop = $value;
     }
 
+    public function __clone() {
+        return $this->clone();
+    }
+
+    public function clone() {
+        return new self($this->nodeName,$this->realName,$this->description,$this->expression,$this->value);
+    }
+
     public function offsetSet($offset,$value) {
         is_null($offset) ? $this->$$value = $value : $this->$offset = $value;
     }

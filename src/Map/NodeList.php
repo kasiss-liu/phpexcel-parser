@@ -41,6 +41,24 @@ class NodeList implements \arrayaccess{
         return isset($this->list[$nodeKey]) ? $this->list[$nodeKey] : null;
     }
 
+    public function cloneMerge(NodeList $nodeList) {
+        $newNodeList = $this->clone();
+        $newInNodeList = $nodeList->clone();
+        return $this->merge($newNodeList,$newInNodeList);
+    }
+
+    private function merge($nodeList1,$nodeList2) {
+        foreach($nodeList2->getList() as $nodeKey => $node) {
+            $nodeList1->set($nodeKey,$node->clone());
+        }
+        return $nodeList1;
+    }
+    
+    public function clone() {
+        $self = new self();
+        return $this->merge($self,$this); 
+    }
+
     public function offsetSet($offset,$value) {
         is_null($offset) ? $this->list[] = $value : $this->list[$offset] = $value;
     }
@@ -55,6 +73,10 @@ class NodeList implements \arrayaccess{
 
     public function offsetGet($offset) {
         return isset($this->list[$offset]) ? $this->list[$offset] : null;
+    }
+
+    public function __clone() {
+       return $this->clone();
     }
 
 }

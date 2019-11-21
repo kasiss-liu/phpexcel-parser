@@ -32,6 +32,7 @@ class ParseExcelTest extends TestCase
             $data[] = $tmp;
         }
         $data[] = ['node'=>'控制台!A11','real'=>'test11',"desc"=>"desc 11","expr"=>"=控制台!A1*2"];
+        $data[] = ['node'=>'控制台!A12','real'=>'test12',"desc"=>"desc 12","expr"=>"0"];
         return ['data'=>$data ,'mapping'=> $mapping];
     }
 
@@ -43,6 +44,7 @@ class ParseExcelTest extends TestCase
             $data[] = $tmp;
         }
         $data[] = ['node'=>'控制台!A11','real'=>'test11',"desc"=>"desc 11"];
+        $data[] = ['node'=>'控制台!A13','real'=>'test13',"desc"=>"desc 13"];
         return ['data'=>$data ,'mapping'=> $mapping];
     }
 
@@ -71,6 +73,8 @@ class ParseExcelTest extends TestCase
         $this->assertEquals(111,$result['test1']['value']);
 
         $this->assertEquals(222,$result['test11']['value']);
+
+        $this->assertEquals(13,$inputNode->cloneMerge($calcNode)->len());
     }
 
 
