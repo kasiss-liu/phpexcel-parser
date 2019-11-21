@@ -35,10 +35,10 @@ class Loader {
                 continue;
             }
             if(!isset($v[$expression])) {
-                $v[$expression] = "";
+                $v[$expression] = null;
             }
             if(!isset($v[$value])) {
-                $v[$value] = "";
+                $v[$value] = null;
             }
             $node = Node::create($v[$nodeName],$v[$realName],$v[$description],$v[$expression],$v[$value]);
             $nodeList->set($v[$realName],$node);
