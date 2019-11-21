@@ -14,8 +14,8 @@ class Mapping implements \arrayaccess {
         $realName ? $this->realName = $realName : $this->realName = 'realName';
         $nodeName ? $this->nodeName = $nodeName : $this->nodeName = 'nodeName';
         $description ? $this->description = $description : $this->description = 'description';
-        $expression ? $this->expression : $this->expression = 'expression';
-        $value ? $this->value = $value: $this->value = 'value';
+        $expression ? $this->expression = $expression : $this->expression = 'expression';
+        $value ? $this->value = $value : $this->value = 'value';
     }
 
     public function __get($prop) {

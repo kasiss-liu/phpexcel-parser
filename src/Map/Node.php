@@ -13,7 +13,7 @@ class Node implements \arrayaccess {
     protected $cellName;
 
 
-    public function __construct($nodeName,$realName,$desc,$expression="",$value="") {
+    public function __construct($nodeName,$realName,$desc,$expression=null,$value=null) {
         $this->realName = $realName;
         $this->nodeName = $nodeName;
         $this->description = $desc;

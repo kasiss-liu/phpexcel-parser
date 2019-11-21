@@ -28,9 +28,10 @@ class ParseExcelTest extends TestCase
         $mapping = new Mapping('node','real','desc','expr','v');
         $data = [];
         for($i = 1; $i <= 10; $i++) {
-            $tmp = ['node'=>'测试!A'.$i,'real'=>'test'.$i,"desc"=>"desc ".$i,'v'=>$i*10,'expr'=>""];
+            $tmp = ['node'=>'测试!A'.$i,'real'=>'test'.$i,"desc"=>"desc ".$i,'expr'=>strval($i*10)];
             $data[] = $tmp;
         }
+        $data[] = ['node'=>'控制台!A11','real'=>'test11',"desc"=>"desc 11","expr"=>"=控制台!A1*2"];
         return ['data'=>$data ,'mapping'=> $mapping];
     }
 
@@ -41,10 +42,14 @@ class ParseExcelTest extends TestCase
             $tmp = ['node'=>'控制台!A'.$i,'real'=>'test'.$i,"desc"=>"desc ".$i];
             $data[] = $tmp;
         }
+        $data[] = ['node'=>'控制台!A11','real'=>'test11',"desc"=>"desc 11"];
         return ['data'=>$data ,'mapping'=> $mapping];
     }
 
-    public function testCalcExcel()
+    /**
+     * @test
+     */
+    public function CalcExcel()
     {
 
         $inputNode = $this->createInputNodeData();
@@ -65,5 +70,10 @@ class ParseExcelTest extends TestCase
         $result = $excel->doCalcValue();
         $this->assertEquals(111,$result['test1']['value']);
 
+        $this->assertEquals(222,$result['test11']['value']);
     }
+
+
+
+
  }

@@ -65,7 +65,9 @@ class ExcelSheets {
             return false;
         }
         foreach($this->initVars->getList() as $nodeKey => $node) {
-            $this->excel->getSheetByName($node['sheetName'])->setCellValue($node['cellName'],$node['value']);
+            if($node['expression'] !== null) {
+                $this->excel->getSheetByName($node['sheetName'])->setCellValue($node['cellName'],$node['expression']);
+            }
         }
         return true;
     }
