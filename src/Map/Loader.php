@@ -17,7 +17,7 @@ class Loader {
             return false;
         }
         $nodeName = 'nodeName';
-        $realName = 'realname';
+        $realName = 'realName';
         $description = 'description';
         $expression = 'expression';
         $value = 'value';
