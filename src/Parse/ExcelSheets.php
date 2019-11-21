@@ -4,6 +4,7 @@ namespace Kasiss\PhpExcelParser\Parse;
 
 use Kasiss\PhpExcelParser\Map\NodeList;
 
+
 class ExcelSheets {
 
     protected $excel;
@@ -37,7 +38,11 @@ class ExcelSheets {
     }
 
     public function reset() {
+        $this->resetVars();
         $this->excel = null;
+    }
+
+    public function resetVars() {
         $this->filePath = "";
         $this->initVars = null;
         $this->calculatedValues = null;
@@ -81,6 +86,8 @@ class ExcelSheets {
     }
 
     public function doCalcValue(){
+        //clear calc cache
+        \PhpOffice\PhpSpreadsheet\Calculation\Calculation::getInstance($this->excel)->clearCalculationCache();
         foreach($this->calculatedValues->getList() as $nodeKey => $node) {
             $this->calculatedValues[$nodeKey]['expression'] = $this->excel->getSheetByName($node['sheetName'])->getCell($node['cellName'])->getValue();
             $this->calculatedValues[$nodeKey]['value'] = $this->excel->getSheetByName($node['sheetName'])->getCell($node['cellName'])->getCalculatedValue();
