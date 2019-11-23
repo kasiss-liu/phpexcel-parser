@@ -79,4 +79,7 @@ class NodeList implements \arrayaccess{
        return $this->clone();
     }
 
+    public function __toString() {
+        return $this->toJson();
+    }
 }

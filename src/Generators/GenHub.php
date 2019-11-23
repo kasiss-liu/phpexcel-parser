@@ -63,6 +63,10 @@ class GenHub implements \Iterator {
             $key .= $gen->key()."_";
         }
         return rtrim($key,"_");
-    }   
+    }
+    
+    public function count() {
+        return count($this->gens);
+    }
     
 }
