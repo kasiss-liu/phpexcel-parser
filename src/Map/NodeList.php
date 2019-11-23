@@ -10,7 +10,7 @@ class NodeList implements \arrayaccess{
         $this->list[$nodeKey] = $node;
     }
     public function unset($nodeKey) {
-        unsert($this->list[$nodeKey]);
+        unset($this->list[$nodeKey]);
     }
     public function len() {
         return count($this->list);
