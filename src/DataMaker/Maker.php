@@ -22,6 +22,8 @@ class Maker {
 
     protected $saveHandler;
 
+    protected $outputFileName;
+
     public function __construct($excelBasePath,$mappingDir,$outputDir,$assocKey,$version) {
         $this->excelStore = $excelBasePath;
         $this->mappingDir = $mappingDir;
@@ -93,7 +95,7 @@ class Maker {
             array_pop($dotNodes);
             $realname = implode(".",$dotNodes);
             $versionDir = $outputDir."/".$version;
-            $filename = $versionDir."/".$realname.".dat";
+            $filename = $this->outputFileName ? $this->outputFileName : $versionDir."/".$realname.".dat";
             if(!is_dir($versionDir)) {
                 mkdir($versionDir);
             }
@@ -109,6 +111,10 @@ class Maker {
             throw new \Exception("fn is not a Closure");
         }
         $this->saveHandler = $fn;
+    }
+
+    public function setOutputFileName($filename) {
+        $this->outputFileName = $filename;
     }
 
 
