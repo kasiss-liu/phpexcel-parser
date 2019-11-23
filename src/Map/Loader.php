@@ -45,5 +45,35 @@ class Loader {
         }
         return $nodeList;
     }
+
+
+    public static function loadNodeDefinedJsonFile($mappingFilePath,$assocKey = "") {
+        if(!file_exists($mappingFilePath)) {
+            return false;
+        }
+        $contents = \file_get_contents($mappingFilePath);
+        $jsonArr = \json_decode($contents,1);
+        if(!$jsonArr) {
+            return false;
+        }
+        if($assocKey) {
+            $jsonArr = array_column($jsonArr,null,$assocKey);
+        }
+        return $jsonArr;
+    }
+
+    public static function loadNodeDefinedMultiJsonFile($assocKey, ...$mapFiles) {
+        $data = [];
+        foreach($mapFiles as $key => $filePath) {
+            $data[$key] = Loader::loadNodeDefinedJsonFile($filePath,null);
+        }
+        $data = array_merge(...$data);
+        if($assocKey) {
+            $data = array_column($data,null,$assocKey);
+        }
+        return $data;
+    }
+
+
     
 }
