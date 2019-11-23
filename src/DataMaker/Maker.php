@@ -67,7 +67,7 @@ class Maker {
             $excel->loadInitVars($inputNodeList);
             $nodeList = $excel->doCalcValue();
 
-            call_user_func_array($this->saveHandler,[$nodeList,$excelName,$this->outputDir,$this->version]);
+            call_user_func_array($this->saveHandler,[$nodeList,$excelName,$this->outputDir,$this->version,$this->outputFileName]);
         }
        
     }
@@ -89,13 +89,13 @@ class Maker {
     }
 
     private function saveFileHandler() {
-        return function ($line,$excelName,$outputDir,$version) {
+        return function ($line,$excelName,$outputDir,$version,$outputFileName) {
             $excelNames = explode("/",$excelName);
             $dotNodes = explode(".",$excelNames[count($excelNames)-1]);
             array_pop($dotNodes);
             $realname = implode(".",$dotNodes);
             $versionDir = $outputDir."/".$version;
-            $filename = $this->outputFileName ? $this->outputFileName : $versionDir."/".$realname.".dat";
+            $filename = $outputFileName ? $outputFileName : $versionDir."/".$realname.".dat";
             if(!is_dir($versionDir)) {
                 mkdir($versionDir);
             }
