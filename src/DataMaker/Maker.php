@@ -95,7 +95,7 @@ class Maker {
             array_pop($dotNodes);
             $realname = implode(".",$dotNodes);
             $versionDir = $outputDir."/".$version;
-            $filename = $outputFileName ? $outputFileName : $versionDir."/".$realname.".dat";
+            $filename = $outputFileName ? $versionDir."/".$outputFileName : $versionDir."/".$realname.".dat";
             if(!is_dir($versionDir)) {
                 mkdir($versionDir);
             }
