@@ -68,5 +68,13 @@ class GenHub implements \Iterator {
     public function count() {
         return count($this->gens);
     }
+
+    public function total() {
+        $total = $this->count() > 0 ? 1 : 0;
+        foreach($this->gens as $gen) {
+            $total *= $gen->total();
+        }
+        return $total;
+    }
     
 }

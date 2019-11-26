@@ -24,6 +24,8 @@ class Maker {
 
     protected $outputFileName;
 
+    protected $printProcess = false;
+
     public function __construct($excelBasePath,$mappingDir,$outputDir,$assocKey,$version) {
         $this->excelStore = $excelBasePath;
         $this->mappingDir = $mappingDir;
@@ -37,6 +39,11 @@ class Maker {
 
         if($genhub->count() != count($hubMap)) {
             return false;
+        }
+
+        if($this->printProcess) {
+            printf("Excel: %s\n",$excelName);
+            printf("Version: %d\n",$this->version);
         }
 
         $iNodeFiles = $this->checkAndCompleteFilePath($this->mappingDir,$inputNodeFiles);
@@ -55,6 +62,9 @@ class Maker {
         $excel = new ExcelSheets($this->excelStore."/".$excelName);
         $excel->loadCalcVars($outputNoddeList);
 
+        $datTotal = $genhub->total();
+        $runNum = 0;
+
         foreach($genhub as $vars) {
                
             $params = explode('_',$vars);
@@ -68,6 +78,13 @@ class Maker {
             $nodeList = $excel->doCalcValue();
 
             call_user_func_array($this->saveHandler,[$nodeList,$excelName,$this->outputDir,$this->version,$this->outputFileName]);
+            
+            $runNum++;
+            if($this->printProcess) {
+                $str = str_pad($runNum,20,".");
+                $percent = $runNum/$datTotal;
+                printf("\r%s%.2f%\n",$str,$percent*100);
+            }
         }
        
     }
@@ -117,5 +134,11 @@ class Maker {
         $this->outputFileName = $filename;
     }
 
+    public function switchPrintProcessOn() {
+        $this->printProcess = true;
+    }
+    public function switchPrintProcessOff() {
+        $this->printProcess = false;
+    }
 
 }

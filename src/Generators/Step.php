@@ -14,6 +14,10 @@ class Step implements \Iterator {
         $this->total = count($this->data);
     }
 
+    public function total() {
+        return count($this->data);
+    }
+
     //重置对象属性 遍历开始时被调用
     public function rewind() {
         $this->currentNum = 0;
