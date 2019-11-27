@@ -83,10 +83,12 @@ class Maker {
             if($this->printProcess) {
                 $str = str_pad($runNum,20,".");
                 $percent = $runNum/$datTotal;
-                printf("\r%s%.2f%\n",$str,$percent*100);
+                printf("\r%s%.2f%%",$str,$percent*100);
             }
         }
-       
+        if($this->printProcess) {
+            printf("\nDone. total: %d\n",$datTotal);
+        }
     }
 
     private function checkAndCompleteFilePath($prefix,$checkData) {
