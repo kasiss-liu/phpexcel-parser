@@ -18,7 +18,7 @@ class Boundary implements \Iterator {
     }
 
     public function total() {
-        return floor(($this->end - $this->start + 1) / $this->step);
+        return floor(($this->end - $this->start + $this->step) / $this->step);
     }
 
     //重置对象属性 遍历开始时被调用

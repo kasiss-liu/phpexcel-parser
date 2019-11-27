@@ -12,7 +12,7 @@ class GenTest extends TestCase
 
 
     public function testGenHub() {
-        $bGen = Factory::createBoundaryGen(1,10,1);
+        $bGen = Factory::createBoundaryGen(0.1,1,0.1);
         $sGen = Factory::createStepGen([1,10,100]);
         $sGen2 = Factory::createStepGen([1,10,100,1000]);
 
