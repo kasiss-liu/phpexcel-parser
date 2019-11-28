@@ -10,15 +10,18 @@ class Boundary implements \Iterator {
     protected $step;
     protected $val;
     protected $key = 0;
+    protected $scale = 1;
 
     public function __construct($start,$end,$step) {
-        $this->start = $start;
-        $this->end = $end;
-        $this->step = $step;
+        strpos($step,'.') > 0 &&  $this->scale = pow(10,(strlen($step) - strpos($step,'.') -1));
+        $this->start = $start * $this->scale;
+        $this->end = $end * $this->scale;
+        $this->step = $step * $this->scale;
+        
     }
 
     public function total() {
-        return floor(($this->end - $this->start + $this->step) / $this->step);
+        return ($this->end - $this->start + $this->step)/$this->step;
     }
 
     //重置对象属性 遍历开始时被调用
@@ -36,7 +39,7 @@ class Boundary implements \Iterator {
     }   
     //获取当前值
     public function current() {
-        return $this->val;
+        return $this->val / $this->scale;
     }   
     //获取当前key
     public function key() {

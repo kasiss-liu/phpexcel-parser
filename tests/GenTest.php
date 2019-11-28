@@ -23,4 +23,14 @@ class GenTest extends TestCase
         }
         $this->assertEquals($genhub->total(),$n);
     }
+
+    public function testGenHub1() {
+        $bGen = Factory::createBoundaryGen(1,3,1);
+        $genhub = new GenHub(...[$bGen]);
+        $n=0;
+        foreach($genhub as $gg) {
+            $n++;
+        }
+        $this->assertEquals($genhub->total(),$n);
+    }
 }
